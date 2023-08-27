@@ -45,6 +45,7 @@ class HistoryAppointment extends Component{
                        
         return(    
                <React.Fragment>
+                
                 <div className={classes.olicycontainer}>
             
                         

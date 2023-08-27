@@ -7,6 +7,7 @@ import Button from '../../components/UI/Button/Button';
 import Spinner from '../../components/UI/Spinner/Spinner';
 import classes from './Auth.css';
 import * as actions from '../../store/actions/index';
+import ErrorModal from '../../components/Modal/Modal';
 
 class Auth extends Component {
     state = {
@@ -15,7 +16,7 @@ class Auth extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Mail Address'
+                    placeholder: 'Email adresa'
                 },
                 value: '',
                 validation: {
@@ -29,7 +30,7 @@ class Auth extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'password',
-                    placeholder: 'Password'
+                    placeholder: 'Lozinka'
                 },
                 value: '',
                 validation: {
@@ -43,7 +44,7 @@ class Auth extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'password',
-                    placeholder: 'Confirm password'
+                    placeholder: 'Potvrdite lozinku'
                 },
                 value: '',
                 validation: {
@@ -58,12 +59,12 @@ class Auth extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Name'
+                    placeholder: 'Ime'
                 },
                 value: '',
                 validation: {
                     required: true,
-                    minLength: 6
+                  
                 },
                 valid: false,
                 touched: false
@@ -72,12 +73,12 @@ class Auth extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Surname'
+                    placeholder: 'Prezime'
                 },
                 value: '',
                 validation: {
                     required: true,
-                    minLength: 6
+                  
                 },
                 valid: false,
                 touched: false
@@ -92,7 +93,7 @@ class Auth extends Component {
                 validation: {
                     required: true,
                     minLength: 13,
-                    maxLenght:13,
+                    maxLength:13,
                     isNumeric:true
                 },
                 valid: false,
@@ -102,13 +103,13 @@ class Auth extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Phone number'
+                    placeholder: 'Broj telefona'
                 },
                 value: '',
                 validation: {
                     required: true,
-                    minLength: 6,
-                    isNumeric:true
+                    
+                   
                 },
                 valid: false,
                 touched: false
@@ -117,12 +118,26 @@ class Auth extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Adress'
+                    placeholder: 'Ulica'
                 },
                 value: '',
                 validation: {
                     required: true,
-                    minLength: 6
+                   
+                },
+                valid: false,
+                touched: false
+            },
+            streetNumber: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Broj kuce'
+                },
+                value: '',
+                validation: {
+                    required: true
+                 
                 },
                 valid: false,
                 touched: false
@@ -131,12 +146,12 @@ class Auth extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'City'
+                    placeholder: 'Grad'
                 },
                 value: '',
                 validation: {
-                    required: true,
-                    minLength: 6
+                    required: true
+                   
                 },
                 valid: false,
                 touched: false
@@ -145,12 +160,12 @@ class Auth extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'State'
+                    placeholder: 'Drzava'
                 },
                 value: '',
                 validation: {
-                    required: true,
-                    minLength: 6
+                    required: true
+                   
                 },
                 valid: false,
                 touched: false
@@ -159,12 +174,12 @@ class Auth extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Job'
+                    placeholder: 'Zanimanje'
                 },
                 value: '',
                 validation: {
-                    required: true,
-                    minLength: 6
+                    required: true
+                  
                 },
                 valid: false,
                 touched: false
@@ -173,12 +188,12 @@ class Auth extends Component {
                 elementType: 'input',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Job description'
+                    placeholder: 'Opis zanimanja'
                 },
                 value: '',
                 validation: {
-                    required: true,
-                    minLength: 6
+                    required: true
+                    
                 },
                 valid: false,
                 touched: false
@@ -187,7 +202,7 @@ class Auth extends Component {
                 elementType: 'radio',
                 elementConfig: {
                     type: 'text',
-                    placeholder: 'Gender'
+                    placeholder: 'Pol'
                 },
                 value: '',
                 validation: {
@@ -198,7 +213,8 @@ class Auth extends Component {
                 touched: false
             }
         },
-        isSignup: true
+        isSignup: true,
+        error:null
     }
 
     componentDidMount() {
@@ -258,15 +274,16 @@ class Auth extends Component {
         var user={
             email: this.state.controls.email.value,
             password: this.state.controls.password.value,
-            ime: this.state.controls.name.value,
-            prezime: this.state.controls.surname.value,
-            adresa: this.state.controls.adress.value,
-            grad: this.state.controls.city.value,
-            drzava: this.state.controls.state.value,
-            telefon: this.state.controls.phoneNumber.value,
-            pol: this.state.controls.gender.value,
-            zanimanje: this.state.controls.job.value,
-            infoZanimanje: this.state.controls.jobDesc.value,
+            name: this.state.controls.name.value,
+            surname: this.state.controls.surname.value,
+            street: this.state.controls.adress.value,
+            number: this.state.controls.streetNumber.value,
+            city: this.state.controls.city.value,
+            state: this.state.controls.state.value,
+            phoneNum: this.state.controls.phoneNumber.value,
+            gender: this.state.controls.gender.value,
+            job: this.state.controls.job.value,
+            jogInfo: this.state.controls.jobDesc.value,
             jmbg: this.state.controls.jmbg.value
         }
           this.props.register(user);
@@ -280,6 +297,10 @@ class Auth extends Component {
             return {isSignup: !prevState.isSignup};
         });
     }
+    errorHandler = () => {
+        this.props.error=false;
+       };
+
 
     render () {
         const formElementsArray = [];
@@ -294,7 +315,7 @@ class Auth extends Component {
         const formElementsToRender = formElementsArray.slice(0, formElementsArray.length - 1);
 
         let form = formElementsToRender.map( formElement => (
-            <div>
+            <div className={classes.fields}>
             <Input
                 key={formElement.id}
                 elementType={formElement.config.elementType}
@@ -317,57 +338,73 @@ class Auth extends Component {
             errorMessage = (
                 <p>{this.props.error.message}</p>
             );
+           
         }
 
         let authRedirect = null;
         if (this.props.isAuthenticated) {
             authRedirect = <Redirect to={this.props.authRedirectPath}/>
         }
-
+        let error= localStorage.error
+      
         return (
             <div className={classes.Auth}>
                 {authRedirect}
                 {errorMessage}
+                { error===true && <ErrorModal title="Podaci nisu validni" message={this.props.error.message} onClose={localStorage.setItem('error',false)} /> }
                 <div className="reg">
-                <form onSubmit={this.submitHandler}>
+                <form className={classes.formAuth} onSubmit={this.submitHandler}>
                     {form}
                
-                    <div className="form-group">
-                        <label></label>
-                        <div className="radio">
-                        <label>Gender:</label>
+                    <div className={classes.fields}>
+                      
+                        <div >
+                        <label className={classes.radiolabel}>Pol:</label>
                         <span >
-                        <label>
+                        <label className={classes.radiolabel}>
                             <input
                             type="radio"
                             value="MUSKI"
                             checked={this.state.controls.gender.value === 'MUSKI'}
                             onChange={( event ) => this.inputChangedHandler( event, "gender" )}
                             />
-                            Male
+                            Muški
                         </label>
                         </span>
                         <span>
-                        <label>
+                        <label className={classes.radiolabel}>
                             <input
                             type="radio"
                             value="ZENSKI"
                             checked={this.state.controls.gender.value === 'ZENSKI'}
                             onChange={( event ) => this.inputChangedHandler( event, "gender" )}
                             />
-                            Female
+                            Ženski
                         </label>
                         </span>
                         </div>
                         </div>
-                        <Button btnType="Success">SUBMIT</Button>
-
-                        
+                        <div className={classes.fields}>
+                      
+                        </div>
+                        <input type="button" value="Posaljite zahtev" onClick={this.submitHandler} disabled={!(this.state.controls.email.valid &&
+                                                    this.state.controls.password.valid &&
+                                                    this.state.controls.Confirmpassword.valid &&
+                                                    this.state.controls.name.valid &&
+                                                    this.state.controls.surname.valid &&
+                                                    this.state.controls.jmbg.valid &&
+                                                    this.state.controls.phoneNumber.valid &&
+                                                    this.state.controls.adress.valid &&
+                                                    this.state.controls.city.valid &&
+                                                    this.state.controls.state.valid &&
+                                                    this.state.controls.job.valid &&
+                                                    this.state.controls.jobDesc.valid &&
+                                                    this.state.controls.gender.valid &&
+                                                    this.state.controls.streetNumber.valid)}/>
                 </form>
+               
                 </div>
-                <Button 
-                    clicked={this.switchAuthModeHandler}
-                    btnType="Danger">SWITCH TO {this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}</Button>
+               
 
             </div>
         );

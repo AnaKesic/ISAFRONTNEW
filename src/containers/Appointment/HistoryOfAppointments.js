@@ -11,7 +11,7 @@ class HistoryOfAppointments extends Component{
     }
            
     componentDidMount() {
-        axios.get('http://localhost:8090/api/korisnik/getHistoryOfDonorAppointments',{
+        axios.get('http://localhost:8090/api/user/getHistoryOfDonorAppointments',{
           params:{
            "email": localStorage.userId}})
           .then(res => {
@@ -43,7 +43,7 @@ class HistoryOfAppointments extends Component{
                if(this.state.selected==="Sort by doctor a-z"){filter="doctor_a_z"}
                if(this.state.selected==="Sort by doctor z-a"){filter="doctor_z_a"}
              
-               axios.get('http://localhost:8090/api/korisnik/sortHistoryOfDonorAppointments',
+               axios.get('http://localhost:8090/api/user/sortHistoryOfDonorAppointments',
                {
                 params:{
                     email:localStorage.userId,
@@ -71,11 +71,11 @@ class HistoryOfAppointments extends Component{
             <div>
            
                <React.Fragment>
-
+                 
              
                 <div className={classes.olicycontainer}>
                 <div className={classes.selectt}>
-                   
+                   <label>Sort appointments</label>
                  <select onChange={(event) =>
                 this.handleSelectChange(event)}>
                 {options.map((value) => (

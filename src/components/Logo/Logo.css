@@ -1,11 +1,16 @@
 .Logo {
-    background-color: white;
+    background-color: rgb(59, 209, 214);
     padding: 8px;
     height: 100%;
     box-sizing: border-box;
     border-radius: 5px;
+    text-align: center;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
 }
 
-.Logo img {
-    height: 100%;
+.Logo label {
+    text-align: center;
+    margin-top:10px;
+    margin-bottom: -5px;
 }

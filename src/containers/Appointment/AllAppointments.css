@@ -50,14 +50,19 @@ body {
 td{
     flex-basis: 33.333%;
     text-align: center;
+    justify-content: center;
+     margin:auto;
 }
 
-  button{
+  .button{
        border-color: grey;
        border-width: 0.5px;
        color: rgb(18, 28, 120);
-       height: 100%;
+       height: 70%;
        width: 70%;
+       text-align: center;
+       margin:auto;
+
   }
 
   .selectt{
@@ -65,4 +70,6 @@ td{
   margin:auto;
    
   }
-  
+ h1 {
+  text-align: center;
+ }

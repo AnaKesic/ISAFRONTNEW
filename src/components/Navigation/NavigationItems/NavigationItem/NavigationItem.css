@@ -20,13 +20,11 @@
    position: relativ;
    padding: 15%;
    color:rgb(0, 183, 255);
-   text-decoration: double;
-   text-transform: none;
+  
    font-weight:500;
-   letter-spacing: 2px;
-   transition: 0.5s;
+  
    white-space: nowrap;
-   border-radius: 50%;
+  
    border-style: none;
    border-color: beige;
    
@@ -37,7 +35,7 @@
 .NavigationItem a:hover{
   background: rgb(127, 191, 255);
   color:bisque;
-  letter-spacing: 2.5px;
+  
 
 }
 

@@ -3,6 +3,9 @@
 
 body {
     overflow-y: scroll;
+    justify-content: center;
+    margin:auto;
+    margin-bottom: 50px;
   }
   
   .reg {
@@ -22,11 +25,11 @@ body {
    
   }
   
-  .reg form {
+  .formAuth {
     
     margin-top: 10px;
-    margin-bottom: 10px;
-
+    margin-bottom: 30px;
+    margin:auto;
     display:grid;
     grid-template-columns: 400px 400px ;
   }
@@ -57,9 +60,9 @@ body {
   Input[type="text"],
   Input[type="password"] {
     width: 100%;
+    margin:auto;
     padding: 10px;
     border: 1px solid #4fe5ae;
-    border-radius: 4px;
     box-sizing: border-box;
     margin-bottom: 20px;
   }
@@ -72,6 +75,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
+     margin:auto;
   }
   
   Input[type="submit"]:hover {
@@ -81,15 +85,6 @@ body {
   .error {
     color: red;
     margin-bottom: 10px;
-  }
-  .radio{
-    display:flex;
-    width: 100%;
-    padding: 10px;
-    
-    border-radius: 4px;
-    box-sizing: border-box;
-    margin-bottom: 20px;
   }
   
   select {
@@ -104,5 +99,39 @@ body {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
+  }
+  
+  form{
+        display: grid;
+
+  }
+
+  .fields{
+    width: 300px;
+    justify-content: center;
+    text-align: center;
+    margin:auto
+  }
+  input[type="radio"]{
+    justify-content: center;
+    margin:auto;
+    text-align: center;
+    font-family: monospace;
+    text-decoration: #4fe5ae;
+  }
+
+  input[type="button"]{
+   width:150px;
+   text-align: center;
+   margin:auto;
+   grid-column: span 2;
+   text-align: center;
+ 
+  }
+  .loginForm{
+     display: grid;
+     justify-content: center;
+     text-align: center;
+
   }
   

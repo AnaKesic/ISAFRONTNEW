@@ -2,9 +2,13 @@ import React, { Component } from "react";
 import axios from 'axios'
 import { format, parse } from 'date-fns';
 import classes from './AllAppointments.css'
+import ErrorModal from '../../components/Modal/Modal'
 class AllAppointments extends Component{
     state={
-        appoints:[]
+        appoints:[],
+        error:null,
+        title:'',
+        message:''
      }
 
      componentDidMount() {
@@ -24,6 +28,7 @@ class AllAppointments extends Component{
     }
 
       handleSheduleAppointment = (id) => {
+          
         var dto={
             appointmentId:id,
             donorEmail: localStorage.userId
@@ -31,10 +36,28 @@ class AllAppointments extends Component{
         axios.put('http://localhost:8090/api/appointment/sheduleAppointment',dto)
         .then(res => {
            console.log(res.data)
+           window.location.href="http://localhost:3000/sheduledAppointments"
+        })
+        .catch(err => {
+            console.log(err.response.data);
+           
+            
+            this.setState({
+                error:true,
+                title: 'Upozorenje',
+                message: err.response.data
+
+              });
+          
+            
         });
 
         }
-
+    
+        errorHandler = () => {
+           this.setState({error:null})
+          };
+          
     
 
 
@@ -43,11 +66,15 @@ class AllAppointments extends Component{
 
     render(){
         const { appoints} = this.state;
-       
+       const {error}=this.state;
                
                        
         return(    
-               <React.Fragment>
+
+           
+               <section>
+                 { error===true && <ErrorModal title={this.state.title} message={this.state.message} onClose={this.errorHandler} /> }
+              
                 <div className={classes.olicycontainer}>
             
                         
@@ -55,9 +82,9 @@ class AllAppointments extends Component{
                         <tr className={classes.headings}>
                             <th className={classes.heading}>Datum</th>
                             <th className={classes.heading}>Vreme</th>
-                            <th className={classes.heading}>Predvidjeno trajanje</th>
+                            <th className={classes.heading}>Trajanje</th>
                             <th className={classes.heading}>Doktor</th>
-                            <th className={classes.heading}>Zakazi termin</th>
+                            <th className={classes.heading}>Zakažite termin</th>
                         </tr>
                             
                {appoints.map(bank => {
@@ -72,7 +99,7 @@ class AllAppointments extends Component{
                                     <td>{timeonly}</td>
                                     <td>{duration} min</td>
                                     <td>{doctor.name} {doctor.surname}</td>
-                                    <td><button onClick={() => this.handleSheduleAppointment(id)}>Zakazi</button></td>
+                                    <td><button className={classes.button}onClick={() => this.handleSheduleAppointment(id)}>Zakažite</button></td>
                                 </tr>
                             
                  )
@@ -85,8 +112,8 @@ class AllAppointments extends Component{
 
 
 
-           
-               </React.Fragment>
+            
+               </section>
         );}
 }
 export default (AllAppointments)

@@ -9,7 +9,7 @@ class AnsweredComplaints extends Component{
     }
            
     componentDidMount() {
-        axios.get('http://localhost:8090/api/korisnik/getDonorComplaints',{
+        axios.get('http://localhost:8090/api/user/getDonorComplaints',{
           params:{
            "email": localStorage.userId}})
           .then(res => {

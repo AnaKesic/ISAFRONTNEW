@@ -19,7 +19,7 @@ class NewComplaint extends Component{
     }
    
     componentDidMount() {
-      axios.get('http://localhost:8090/api/korisnik/getAllAllowed',{
+      axios.get('http://localhost:8090/api/user/getAllAllowed',{
         params:{
          "email": localStorage.userId}})
         
@@ -73,6 +73,7 @@ class NewComplaint extends Component{
        axios.post('http://localhost:8090/api/complaint/addNew', object)
         .then(res=>{
                      console.log(res.data)
+                     window.location.href="http://localhost:3000/answeredcomplaints"
         })
         .catch(error => {
             console.error("Error submitting complaint:", error);

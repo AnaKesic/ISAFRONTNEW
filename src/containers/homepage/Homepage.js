@@ -33,8 +33,9 @@ class Homepage extends Component {
                        
                              return(    
                                     <React.Fragment>
+                                    <div className={classes.body}>
                                     {bbanks.map(bank => {
-                                           const { id,name,description, street, number, city, state,rating}=bank;
+                                           const { id,name,description, street, address,rating}=bank;
 
                                       return(
                                         <div className={classes.card}>
@@ -43,8 +44,8 @@ class Homepage extends Component {
                                             </div>
                                                 <div className={classes.container}>
                                                 <p>{description}</p>
-                                                <p>{street}</p>
-                                                <p>{rating}</p>
+                                                <p>Adresa:{address.street} {address.number}, {address.city}, {address.state}</p>
+                                                <p>Ocena:{rating}</p>
                                                 {this.props.isAuthenticated? <button onClick={() => this.handleAppointment(id)} >Make appointment</button> :null }
                                             </div>
                                         </div>
@@ -53,6 +54,7 @@ class Homepage extends Component {
 
 
                                     })}
+                                    </div>
                                     </React.Fragment>
                              );}
 }

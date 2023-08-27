@@ -8,12 +8,15 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (token, userId) => {
+export const authSuccess = (token, userId,role) => {
+      
     return {
         type: actionTypes.AUTH_SUCCESS,
         idToken: token,
-        userId: userId
+        userId: userId,
+        role:role
     };
+   
 };
 
 export const authFail = (error) => {
@@ -27,6 +30,7 @@ export const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
     localStorage.removeItem('userId');
+    localStorage.removeItem('role')
     return {
         type: actionTypes.AUTH_LOGOUT
     };
@@ -59,11 +63,17 @@ export const auth = (email, password, isSignup) => {
                 localStorage.setItem('token', response.data.accessToken);
                 localStorage.setItem('expirationDate', expirationDate);
                 localStorage.setItem('userId', authData.username);
-                dispatch(authSuccess(response.data.token, authData.username));
+                localStorage.setItem('role',response.data.roles);
+                dispatch(authSuccess(response.data.token, authData.username,response.data.role));
                 dispatch(checkAuthTimeout(3000));
-            })
+                setAuthRedirectPath('/');
+                localStorage.setItem('error', false)
+               
+            }
+           )
             .catch(err => {
                 dispatch(authFail(err.response.data.error));
+                localStorage.setItem('error',true);
             });
     };
 };
@@ -86,7 +96,8 @@ export const authCheckState = () => {
                 dispatch(logout());
             } else {
                 const userId = localStorage.getItem('userId');
-                dispatch(authSuccess(token, userId));
+            
+                dispatch(authSuccess(token, userId,localStorage.getItem('role')));
                 dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000 ));
             }   
         }
@@ -98,11 +109,12 @@ export const register= (user)=>{
             .then(response => {
                 
                 console.log(response);
-                dispatch(authStart);
-                dispatch(auth(user.email,user.password,true));
+                window.location.href="http://localhost:3000/message"
+                localStorage.setItem('error', false)
             })
             .catch(err => {
                 dispatch(authFail(err));
+                localStorage.setItem('error', true)
         });
 
        }

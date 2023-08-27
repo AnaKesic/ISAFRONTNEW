@@ -8,7 +8,7 @@ class SheduledAppointments extends Component{
      }
 
      componentDidMount() {
-        axios.get('http://localhost:8090/api/korisnik/getSheduledDonorAppointments', {
+        axios.get('http://localhost:8090/api/user/getSheduledDonorAppointments', {
          params: {
              email: localStorage.userId
           }})

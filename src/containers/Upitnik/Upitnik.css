@@ -1,10 +1,9 @@
 .okvir{
     width: 800px;
-    height:500px;
+    height:1615px;
     border-color:blue;
     border-style: solid;
-    scrollbar-width: 5px;
-    overflow: scroll;
+  
 }
 h3{
     text-align: center;
@@ -65,4 +64,9 @@ h3{
    border-style: none;
 
   }
-  
+  .button{
+    text-align: center;
+    margin:auto;
+    padding:15px;
+    height:70px;
+  }
